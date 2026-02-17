@@ -441,9 +441,10 @@ class TestSubprocessCLITransport:
                 # Check that custom env var was passed
                 assert env_passed["MY_TEST_VAR"] == test_value
 
-                # Verify SDK identifier is present
-                assert "CLAUDE_CODE_ENTRYPOINT" in env_passed
-                assert env_passed["CLAUDE_CODE_ENTRYPOINT"] == "sdk-py"
+                # FORK: SDK identity markers are commented out to enable Max subscription auth.
+                # These assertions no longer apply since CLAUDE_CODE_ENTRYPOINT is not set.
+                # assert "CLAUDE_CODE_ENTRYPOINT" in env_passed
+                # assert env_passed["CLAUDE_CODE_ENTRYPOINT"] == "sdk-py"
 
                 # Verify system env vars are also included with correct values
                 if "PATH" in os.environ:

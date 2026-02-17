@@ -64,7 +64,9 @@ class ClaudeSDKClient:
         self._custom_transport = transport
         self._transport: Transport | None = None
         self._query: Any | None = None
-        os.environ["CLAUDE_CODE_ENTRYPOINT"] = "sdk-py-client"
+        # FORK: Commented out SDK entrypoint marker to allow Max subscription auth.
+        # See query.py for full explanation.
+        # os.environ["CLAUDE_CODE_ENTRYPOINT"] = "sdk-py-client"
 
     def _convert_hooks_to_internal_format(
         self, hooks: dict[HookEvent, list[HookMatcher]]

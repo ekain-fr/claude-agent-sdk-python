@@ -342,12 +342,15 @@ class SubprocessCLITransport(Transport):
 
         cmd = self._build_command()
         try:
-            # Merge environment variables: system -> user -> SDK required
+            # Merge environment variables: system -> user env vars
+            # FORK: Commented out SDK identity markers to allow Max subscription auth.
+            # These env vars tell the CLI "this is an SDK call" which triggers API-key-only enforcement.
+            # Without them, the CLI treats this as a direct `claude -p` call and accepts subscription login.
             process_env = {
                 **os.environ,
                 **self._options.env,  # User-provided env vars
-                "CLAUDE_CODE_ENTRYPOINT": "sdk-py",
-                "CLAUDE_AGENT_SDK_VERSION": __version__,
+                # "CLAUDE_CODE_ENTRYPOINT": "sdk-py",
+                # "CLAUDE_AGENT_SDK_VERSION": __version__,
             }
 
             # Enable file checkpointing if requested

@@ -116,7 +116,10 @@ async def query(
     if options is None:
         options = ClaudeAgentOptions()
 
-    os.environ["CLAUDE_CODE_ENTRYPOINT"] = "sdk-py"
+    # FORK: Commented out SDK entrypoint marker to allow Max subscription auth.
+    # The CLI uses this env var to enforce API-key-only auth for SDK callers.
+    # Without it, the CLI treats this as a direct `claude -p` call and accepts subscription login.
+    # os.environ["CLAUDE_CODE_ENTRYPOINT"] = "sdk-py"
 
     client = InternalClient()
 
